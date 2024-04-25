@@ -1,12 +1,30 @@
 # Analyzing GitHub Data with BigQuery Using GH Archive
 
-[GH Archive](https://www.gharchive.org) publishes GitHub event data as a [BigQuery public dataset](https://cloud.google.com/bigquery/public-data/) and through downloadable archives.
+[GH Archive](https://www.gharchive.org) is a record of the public GitHub timeline, made available as a [BigQuery public dataset](https://cloud.google.com/bigquery/public-data/) and through downloadable archives.
 
-The project includes [over 15 event types](https://docs.github.com/en/rest/using-the-rest-api/github-event-types?apiVersion=2022-11-28) of GitHub metadata, including Issues, Releases, Stars, Pull Requests, Commits.
+All public GitHub Issues, Releases, Stars, Pull Requests, Commits, and more included on the public GitHub timeline. GH Archive makes this metadata available for analysis, including [over 15 event types](https://docs.github.com/en/rest/using-the-rest-api/github-event-types?apiVersion=2022-11-28). You can easily analyze GH Archive data by using the [Google Cloud Console](http://console.cloud.google.com) to query the dataset. 
 
-You can easily analyze GH Archive data by using the [Google Cloud Console](http://console.cloud.google.com) to query the dataset. This repository shares some examples of how you can use BigQuery and the GH Archive dataset, along with some insight into what's happening within each query.
+This repository shares examples for how you can use BigQuery and the GH Archive dataset to analyze public GitHub activity for your next project.
 
-## Tips before getting started
+## Outline
+
+- [Getting Started](#getting-started)
+- [Querying Basic Community Metrics](#querying-basic-community-metrics)
+- [Additional Resources](#additional-resources)
+
+## Getting Started
+
+### What can GH Archive data be used for?
+
+GH Archive has a [list of research, visualizations, and talks based on their dataset](http://www.gharchive.org/#resources) which may spur some ideas! A sampling of some of those projects include:
+
+- [GitLive](https://www.gitlive.net/): a visualization of what's happening on GitHub in real-time
+- [Changelog Nightly](https://changelog.com/nightly/): an email newsletter featuring the top new and top starred projects on GitHub
+- [GitHut](https://githut.info): a visualization of programming languages used on GitHub
+
+Whether you're an individual developer, a community, or an [Open Source Program Office (OSPO)](https://todogroup.org) managing multiple projects, the GH Archive dataset may be useful for you. Once your queries are written, you can apply them to new repositories and GitHub organizations, as well as adjust the time periods you're analyzing.
+
+### Tips for using BigQuery as you begin
 
 - At the time of writing, the first 1 TiB per month of queries to BigQuery is free. Up-to-date details on pricing is available on the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 - Within the Google Cloud Console, after you type your query and before it is run you'll be told how much data will be queried.
@@ -51,3 +69,12 @@ FROM `githubarchive.month.202402` AS events
   WHERE
     events.org.login = 'apache'
 ```
+
+## Additional Resources
+
+"[Exploring GitHub with BigQuery at GitHub](https://www.youtube.com/watch?v=Ast3-RFVHkM)" (video)(2017) introduces you to the BigQuery UI, writing queries to access GH Archive, and visualizing data with tools like Tableau and Looker.
+
+GH Archive data is also used by multiple services which analyze GitHub activity and provide higher-level interfaces, APIs, and open source tools:
+
+- [Ecosyste.ms Timeline](https://timeline.ecosyste.ms): WebUI and open API service of over 8 billion events for every public repo on GitHub dating back to 2015
+- [DevStats](https://github.com/cncf/devstats): CNCF-created tool for that visualizes GH Archive data using Grafana dashboards
