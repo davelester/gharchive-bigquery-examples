@@ -26,11 +26,17 @@ Whether you're an individual developer, a community, or an [Open Source Program 
 
 ### Tips for using BigQuery as you begin
 
+- If you're new to BigQuery, check out [A Beginner's Guide to BigQuery](https://www.datacamp.com/tutorial/beginners-guide-to-bigquery) as well as Google Cloud's guide: "[Explore the Google Cloud Console](https://cloud.google.com/bigquery/docs/bigquery-web-ui)" to become familiar with the console which we'll use in these examples.
 - At the time of writing, the first 1 TiB per month of queries to BigQuery is free. Up-to-date details on pricing is available on the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 - Within the Google Cloud Console, after you type your query and before it is run you'll be told how much data will be queried.
 - When starting with a query, start by querying a smaller amount of data (for example, one day) to reduce costs and imrpove your queries. After confirming that it works as intended, expand your query to more data (for example, a month or year).
 
 ## Querying Basic Community Metrics
+
+Each of the following example queries build upon one another, looking at GitHub activity for projects released by the [Apache Software Foundation](https://www.apache.org). We'll run these queries by entering them into the [Google Cloud Web Console](http://console.cloud.google.com).
+
+Note that while these queries look similar, there are noticable differences that impact what data is being queried as well as the results. Do you notice the differences?
+
 ### Project Contributors on a Single Day
 
 - Metric: unique contributors to a single project on a single day
@@ -69,6 +75,23 @@ FROM `githubarchive.month.202402` AS events
   WHERE
     events.org.login = 'apache'
 ```
+
+### Comparing these examples
+
+Each examples retrieves a single value as their output using `COUNT()` in the query. The examples are also all counting unique contributors (note the use of `DISTINCT` in the query to ensure that contributors are not double-counted).
+
+What's different? A few things!
+
+1. The data being queried. Notice the difference between these examples:
+
+- Day: `githubarchive.day.20240201`
+- Month: `githubarchive.month.202402`
+- Year: `githubarchive.year.2023`
+
+2. The scope of the query's `WHERE` statements:
+
+- Specific Repository: `events.repo.name = 'apache/cassandra'`
+- GitHub Organization: `events.org.login = 'apache'`
 
 ## Additional Resources
 
