@@ -10,6 +10,7 @@ This repository shares examples for how you can use BigQuery and the GH Archive 
 
 - [Getting Started](#getting-started)
 - [Querying Basic Community Metrics](#querying-basic-community-metrics)
+- [Queries for Inspiration](#queries-for-inspiration)
 - [Additional Resources](#additional-resources)
 
 ## Getting Started
@@ -99,6 +100,34 @@ What's different? A few things!
 2. The scope of the query's `WHERE` statements:
 - Specific Repository: `events.repo.name = 'apache/cassandra'`
 - GitHub Organization: `events.org.login = 'apache'`
+
+## Queries for Inspiration
+
+Here are some additional queries that may spur ideas for how you can use the GH Archive dataset:
+
+### OSS Releases by Organization
+
+- Intended Result: open source releases for a specific org on a specific day
+- Example Query: Apache Software Foundation on April 24, 2024
+
+```sql
+SELECT
+  repo.name, created_at, id
+FROM `githubarchive.day.20240424` AS events
+  WHERE
+    events.org.login IN ('apache') and type IN ('ReleaseEvent')
+```
+
+- ✅ Result:
+
+| row | name                          | created_at                | id          |
+|-----|-------------------------------|---------------------------|-------------|
+| 1   | apache/apisix                 | 2024-04-24 07:56:23 UTC   | 37761915325 |
+| 2   | apache/pulsar-dotpulsar       | 2024-04-24 17:26:50 UTC   | 37783197893 |
+
+- 💾 Query processed: 341.22 MB
+
+This query returns a list of results, in contrast to the prior example where a single metric was returned using `COUNT`. Results can easily be saved and exported from BigQuery and used by other tools.
 
 ## Additional Resources
 
