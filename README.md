@@ -83,13 +83,11 @@ Each examples retrieves a single value as their output using `COUNT()` in the qu
 What's different? A few things!
 
 1. The data being queried. Notice the difference between these examples:
-
 - Day: `githubarchive.day.20240201`
 - Month: `githubarchive.month.202402`
 - Year: `githubarchive.year.2023`
 
 2. The scope of the query's `WHERE` statements:
-
 - Specific Repository: `events.repo.name = 'apache/cassandra'`
 - GitHub Organization: `events.org.login = 'apache'`
 
