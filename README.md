@@ -50,6 +50,9 @@ FROM `githubarchive.day.20240201` AS events
     events.repo.name = 'apache/cassandra'
 ```
 
+- ✅ Result: 5
+- 💾 Query processed: 157.69 MB
+
 ### Project Contributors in a Month
 
 - Metric: unique contributors to a single project for an entire month
@@ -63,6 +66,9 @@ FROM `githubarchive.month.202402` AS events
     events.repo.name = 'apache/cassandra'
 ```
 
+- ✅ Result: 95
+- 💾 Query processed: 5.08 GB
+
 ### Organizational metrics
 
 - Metric: unique monthly contributors last month to all projects in a GitHub org
@@ -75,6 +81,9 @@ FROM `githubarchive.month.202402` AS events
   WHERE
     events.org.login = 'apache'
 ```
+
+- ✅ Result: 13,452
+- 💾 Query processed: 2 GB
 
 ### Comparing these examples
 
